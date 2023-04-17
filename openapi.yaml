@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: Calgary Fit Friends
+  description: Create pop-up activities and invite family & friends.
+  version: "1.0"
+
+servers:
+  - url: http://localhost:5020
+    description: Local host
+
+components:
+  schemas:
+    UserInfo:
+      type: object
+      properties:
+        userUID:
+          $ref: "#/components/schemas/UID"
+        name:
+          type: string
+        createdActivities:
+          type: array
+          items:
+            $ref: "#/components/schemas/UID"
+        joinedActivities:
+          type: array
+          items:
+            $ref: "#/components/schemas/UID"
+        friendsList:
+          type: array
+          items:
+            $ref: "#/components/schemas/UID"
+        reviews:
+          type: array
+          items:
+            type: object
+            properties:
+              userUID:
+                $ref: "#/components/schemas/UID"
+              details:
+                type: string
+      required:
+        - userUID
+        - name
+        - createdActivities
+        - joinedActivities
+        - friendsList
+        - reviews
+
+    ActivityInfo:
+      type: object
+      properties:
+        activityUID:
+          $ref: "#/components/schemas/UID"
+        location:
+          type: string
+        dateTime:
+          type: string
+        type:
+          type: string
+        details:
+          type: string
+      required:
+        - activityUID
+        - location
+        - dateTime
+        - type
+        - details
+
+    MessagesInfo:
+      type: object
+      properties:
+        messageUID:
+          $ref: "#/components/schemas/UID"
+        sender:
+          $ref: "#/components/schemas/UID"
+        recipients:
+          type: array
+          items:
+            $ref: "#/components/schemas/UID"
+        wasSent:
+          type: boolean
+        wasReceived:
+          type: boolean
+        text:
+          type: string
+      required:
+        - messageUID
+        - sender
+        - details
+        - recipients
+        - wasSent
+        - wasReceived
+
+    UID:
+      oneOf:
+        - type: integer
+        - type: string
+
+    Message:
+      type: object
+      properties:
+        msg:
+          type: string
+      required:
+        - msg
