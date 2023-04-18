@@ -22,4 +22,4 @@ app.post("/users", (req, res) => {
   res.status(201).json(newUser);
 });
 
-app.listen(4200, () => console.log("Server started on port 3000"));
+app.listen(4200, () => console.log("Server started on port 4200"));
