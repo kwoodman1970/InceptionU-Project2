@@ -20,16 +20,10 @@ paths:
             text/html:
               schema:
                 type: string
-        "404":
-          description: Server is unreachable.
-          content:
-            text/html:
-              schema:
-                type: string
 
   /user:
     post:
-      summary: Add new user.
+      summary: Add a new user.
       description: Add a new user to the system.
       requestBody:
         description: Details of the user to be added.
@@ -54,7 +48,7 @@ paths:
 
   /user/{id}:
     get:
-      summary: Returns a specific user.
+      summary: Return a specific user.
       description: Returns information about the user identified by {id}.
       parameters:
         - name: id
@@ -77,7 +71,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
     patch:
-      summary: Update user.
+      summary: Update a specific user.
       description: Update information about the user identified by {id}.
       parameters:
         - name: id
@@ -107,7 +101,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
     delete:
-      summary: Delete user.
+      summary: Delete a specific user.
       description: Removes the user identified by {id} from the system (as well as any related data).
       parameters:
         - name: id
@@ -125,6 +119,163 @@ paths:
                 $ref: "#/components/schemas/Message"
         "404":
           description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /user/{id}/activities/created:
+    get:
+      summary: Returns activities created by a specific user.
+      description: Returns a JSON array of all activities created by the user identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: A JSON array of all activities created by the user identified by {id}.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityInfo"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /user/{id}/activities/joined:
+    get:
+      summary: Returns activities joined by a specific user.
+      description: Returns a JSON array of all activities joined by the user identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: A JSON array of all activities joined by the user identified by {id}.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityInfo"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /activity:
+    post:
+      summary: Add a new activity.
+      description: Add a new activity to the system.
+      requestBody:
+        description: Details of the activity to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivityInfo"
+      responses:
+        "200":
+          description: Activity successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UID"
+        "403":
+          description: Activity already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /activity/{id}:
+    get:
+      summary: Return a specific activity.
+      description: Returns information about the activity identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Activity UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Activity information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActivityInfo"
+        "404":
+          description: Activity not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    patch:
+      summary: Update a specific activity.
+      description: Update information about the activity identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Activity UID
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated details of the activity.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivityInfo"
+      responses:
+        "200":
+          description: Activity successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Activity not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    delete:
+      summary: Delete a specific activity.
+      description: Removes the activity identified by {id} from the system (as well as any related data).
+      parameters:
+        - name: id
+          in: path
+          description: Activity UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Activity successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Activity not found.
           content:
             application/json:
               schema:
