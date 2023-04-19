@@ -281,6 +281,109 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
 
+  /message:
+    post:
+      summary: Add a new message.
+      description: Add a new message to the system.
+      requestBody:
+        description: Details of the message to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInfo"
+      responses:
+        "200":
+          description: Message successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UID"
+        "403":
+          description: Message already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /message/{id}:
+    get:
+      summary: Return a specific message.
+      description: Returns information about the message identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Message UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Message information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageInfo"
+        "404":
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    patch:
+      summary: Update a specific message.
+      description: Update information about the message identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Message UID
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated details of the message.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInfo"
+      responses:
+        "200":
+          description: Message successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    delete:
+      summary: Delete a specific message.
+      description: Removes the message identified by {id} from the system.
+      parameters:
+        - name: id
+          in: path
+          description: message UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: message successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: message not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
 components:
   schemas:
     UserInfo:
@@ -333,7 +436,7 @@ components:
         - type
         - details
 
-    MessagesInfo:
+    MessageInfo:
       type: object
       properties:
         messageUID:
@@ -344,6 +447,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UID"
+        timestamp:
+          type: string
+          format: date-time
         wasSent:
           type: boolean
         wasReceived:
@@ -352,10 +458,9 @@ components:
           type: string
       required:
         - sender
-        - details
         - recipients
-        - wasSent
-        - wasReceived
+        - timestamp
+        - text
 
     UID:
       oneOf:
