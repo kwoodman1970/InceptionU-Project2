@@ -312,12 +312,7 @@ components:
               details:
                 type: string
       required:
-        - userUID
         - name
-        - createdActivities
-        - joinedActivities
-        - friendsList
-        - reviews
 
     ActivityInfo:
       type: object
@@ -333,7 +328,6 @@ components:
         details:
           type: string
       required:
-        - activityUID
         - location
         - dateTime
         - type
@@ -357,7 +351,6 @@ components:
         text:
           type: string
       required:
-        - messageUID
         - sender
         - details
         - recipients
