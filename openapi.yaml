@@ -8,6 +8,128 @@ servers:
   - url: http://localhost:5020
     description: Local host
 
+paths:
+  /:
+    get:
+      summary: Detect server
+      description: Detect whether the server is running or not.
+      responses:
+        "200":
+          description: Server is running.
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: Server is unreachable.
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /user:
+    post:
+      summary: Add new user.
+      description: Add a new user to the system.
+      requestBody:
+        description: Details of the user to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInfo"
+      responses:
+        "200":
+          description: User successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UID"
+        "403":
+          description: User already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /user/{id}:
+    get:
+      summary: Returns a specific user.
+      description: Returns information about the user identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: User information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    patch:
+      summary: Update user.
+      description: Update information about the user identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated details of the user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInfo"
+      responses:
+        "200":
+          description: User successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    delete:
+      summary: Delete user.
+      description: Removes the user identified by {id} from the system (as well as any related data).
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: User successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
 components:
   schemas:
     UserInfo:
