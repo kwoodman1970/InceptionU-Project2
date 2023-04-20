@@ -124,60 +124,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
 
-  /user/{id}/activities/created:
-    get:
-      summary: Returns activities created by a specific user.
-      description: Returns a JSON array of all activities created by the user identified by {id}.
-      parameters:
-        - name: id
-          in: path
-          description: User UID
-          schema:
-            type: string
-          required: true
-      responses:
-        "200":
-          description: A JSON array of all activities created by the user identified by {id}.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ActivityInfo"
-        "404":
-          description: User not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Message"
-
-  /user/{id}/activities/joined:
-    get:
-      summary: Returns activities joined by a specific user.
-      description: Returns a JSON array of all activities joined by the user identified by {id}.
-      parameters:
-        - name: id
-          in: path
-          description: User UID
-          schema:
-            type: string
-          required: true
-      responses:
-        "200":
-          description: A JSON array of all activities joined by the user identified by {id}.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ActivityInfo"
-        "404":
-          description: User not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Message"
-
   /activity:
     post:
       summary: Add a new activity.
@@ -390,28 +336,28 @@ components:
       type: object
       properties:
         userUID:
-          $ref: "#/components/schemas/UID"
+          $ref: "#/components/schemas/UserInfo"
         name:
           type: string
         createdActivities:
           type: array
           items:
-            $ref: "#/components/schemas/UID"
+            $ref: "#/components/schemas/ActivityInfo"
         joinedActivities:
           type: array
           items:
-            $ref: "#/components/schemas/UID"
+            $ref: "#/components/schemas/ActivityInfo"
         friendsList:
           type: array
           items:
-            $ref: "#/components/schemas/UID"
+            $ref: "#/components/schemas/UserInfo"
         reviews:
           type: array
           items:
             type: object
             properties:
               userUID:
-                $ref: "#/components/schemas/UID"
+                $ref: "#/components/schemas/UserInfo"
               details:
                 type: string
       required:
