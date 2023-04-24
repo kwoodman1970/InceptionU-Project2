@@ -1,0 +1,422 @@
+openapi: 3.0.0
+info:
+  title: Calgary Fit Friends
+  description: Create pop-up activities and invite family & friends.
+  version: "1.0"
+
+servers:
+  - url: http://localhost:5020
+    description: Local host
+
+paths:
+  /:
+    get:
+      summary: Detect server
+      description: Detect whether the server is running or not.
+      responses:
+        "200":
+          description: Server is running.
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /user:
+    post:
+      summary: Add a new user.
+      description: Add a new user to the system.
+      requestBody:
+        description: Details of the user to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInfo"
+      responses:
+        "200":
+          description: User successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UID"
+        "403":
+          description: User already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /user/{id}:
+    get:
+      summary: Return a specific user.
+      description: Returns information about the user identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: User information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    patch:
+      summary: Update a specific user.
+      description: Update information about the user identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated details of the user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInfo"
+      responses:
+        "200":
+          description: User successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    delete:
+      summary: Delete a specific user.
+      description: Removes the user identified by {id} from the system (as well as any related data).
+      parameters:
+        - name: id
+          in: path
+          description: User UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: User successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /activity:
+    post:
+      summary: Add a new activity.
+      description: Add a new activity to the system.
+      requestBody:
+        description: Details of the activity to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivityInfo"
+      responses:
+        "200":
+          description: Activity successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UID"
+        "403":
+          description: Activity already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /activity/{id}:
+    get:
+      summary: Return a specific activity.
+      description: Returns information about the activity identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Activity UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Activity information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActivityInfo"
+        "404":
+          description: Activity not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    patch:
+      summary: Update a specific activity.
+      description: Update information about the activity identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Activity UID
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated details of the activity.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivityInfo"
+      responses:
+        "200":
+          description: Activity successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Activity not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    delete:
+      summary: Delete a specific activity.
+      description: Removes the activity identified by {id} from the system (as well as any related data).
+      parameters:
+        - name: id
+          in: path
+          description: Activity UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Activity successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Activity not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /message:
+    post:
+      summary: Add a new message.
+      description: Add a new message to the system.
+      requestBody:
+        description: Details of the message to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInfo"
+      responses:
+        "200":
+          description: Message successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UID"
+        "403":
+          description: Message already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /message/{id}:
+    get:
+      summary: Return a specific message.
+      description: Returns information about the message identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Message UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Message information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageInfo"
+        "404":
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    patch:
+      summary: Update a specific message.
+      description: Update information about the message identified by {id}.
+      parameters:
+        - name: id
+          in: path
+          description: Message UID
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updated details of the message.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInfo"
+      responses:
+        "200":
+          description: Message successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    delete:
+      summary: Delete a specific message.
+      description: Removes the message identified by {id} from the system.
+      parameters:
+        - name: id
+          in: path
+          description: message UID
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: message successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "404":
+          description: message not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+components:
+  schemas:
+    UserInfo:
+      type: object
+      properties:
+        userUID:
+          $ref: "#/components/schemas/UserInfo"
+        name:
+          type: string
+        createdActivities:
+          type: array
+          items:
+            $ref: "#/components/schemas/ActivityInfo"
+        joinedActivities:
+          type: array
+          items:
+            $ref: "#/components/schemas/ActivityInfo"
+        friendsList:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserInfo"
+        reviews:
+          type: array
+          items:
+            type: object
+            properties:
+              userUID:
+                $ref: "#/components/schemas/UserInfo"
+              details:
+                type: string
+      required:
+        - name
+
+    ActivityInfo:
+      type: object
+      properties:
+        activityUID:
+          $ref: "#/components/schemas/UID"
+        location:
+          type: string
+        dateTime:
+          type: string
+        type:
+          type: string
+        details:
+          type: string
+      required:
+        - location
+        - dateTime
+        - type
+        - details
+
+    MessageInfo:
+      type: object
+      properties:
+        messageUID:
+          $ref: "#/components/schemas/UID"
+        sender:
+          $ref: "#/components/schemas/UID"
+        recipients:
+          type: array
+          items:
+            $ref: "#/components/schemas/UID"
+        timestamp:
+          type: string
+          format: date-time
+        wasSent:
+          type: boolean
+        wasReceived:
+          type: boolean
+        text:
+          type: string
+      required:
+        - sender
+        - recipients
+        - timestamp
+        - text
+
+    UID:
+      oneOf:
+        - type: integer
+        - type: string
+
+    Message:
+      type: object
+      properties:
+        msg:
+          type: string
+      required:
+        - msg
