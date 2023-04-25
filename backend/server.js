@@ -41,16 +41,16 @@ app.get("/users", (req, res) => {
   res.json(users);
 });
 
-app.post("/users", (req, res) => {
-  const newUser = {
-    id: uuidv4(),
-    username: req.body.username,
-    password: req.body.password,
-  };
+// app.post("/users", (req, res) => {
+//   const newUser = {
+//     id: uuidv4(),
+//     username: req.body.username,
+//     password: req.body.password,
+//   };
 
-  users.users.push(newUser);
-  res.status(201).json(newUser);
-});
+//   users.users.push(newUser);
+//   res.status(201).json(newUser);
+// });
 
 app.get("/users/:id/friends", (req, res) => {
   const userId = req.params.id;

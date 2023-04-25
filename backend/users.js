@@ -3,7 +3,6 @@ import express from "express";
 import fs from "fs";
 
 const usersData = JSON.parse(fs.readFileSync("./users.json"));
-const friendsData = JSON.parse(fs.readFileSync("./friends.json"));
 
 const app = express();
 app.use(express.json());
@@ -62,9 +61,11 @@ app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
 
-app.get("/users/:id/friends", (req, res) => {
-  const userId = req.params.id;
-  const userFriends = friends.friends.filter(
-    (friend) => friend.userId === userId
-  );
-});
+// Should this be in friends.js?
+
+// app.get("/users/:id/friends", (req, res) => {
+//   const userId = req.params.id;
+//   const userFriends = friends.friends.filter(
+//     (friend) => friend.userId === userId
+//   );
+// });
