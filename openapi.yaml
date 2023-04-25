@@ -336,7 +336,7 @@ components:
       type: object
       properties:
         userUID:
-          $ref: "#/components/schemas/UserInfo"
+          $ref: "#/components/schemas/UID"
         name:
           type: string
         createdActivities:
