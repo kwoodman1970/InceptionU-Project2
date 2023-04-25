@@ -1,1 +1,30 @@
+<<<<<<< HEAD
 []
+=======
+[
+  {
+    "userUID":  0,
+    "name":  "Adam",
+    "createdActivities":	[],
+    "joinedActivities":	 [],
+    "friendsList":	 [],
+    "reviews":	 []
+  },
+  {
+    "userUID":  1,
+    "name":  "Eve",
+    "createdActivities":	[],
+    "joinedActivities":	 [],
+    "friendsList":	 [],
+    "reviews":	 []
+  },
+  {
+    "userUID":  2,
+    "name":  "Serpent",
+    "createdActivities":	[],
+    "joinedActivities":	 [],
+    "friendsList":	 [],
+    "reviews":	 []
+  }
+]
+>>>>>>> main

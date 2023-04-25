@@ -1,0 +1,23 @@
+[
+  {
+    "activityUID": 0,
+    "location": "InceptionU",
+    "dateTime": "2023-05-05T09:00-06:00",
+    "type": "Demo",
+    "details": "It's Project 2 Demo Day!  Bring your projects and be ready to show off what you've done.  No prizes, just good feelings."
+  },
+  {
+    "activityUID": 1,
+    "location": "Eau Claire Market",
+    "dateTime": "2023-05-06T13:00-06:00",
+    "type": "Bike & Blade",
+    "details": "Ride your bike or wear your rollerblades along the paths beside the Bow River.  Don't forget your safety gear!  We'll relax and enjoy some drinks outside The Garage when we get back."
+  },
+  {
+    "activityUID": 2,
+    "location": "Device to Root Out Evil",
+    "dateTime": "2023-05-13T09:00-06:00",
+    "type": "Zombie Jog",
+    "details": "Oh, no -- the zombie apocalypse is upon us!  We have to lead the horde of zombies away from the East Village.  We'll run at a moderate pace along the pathways beside the Bow River.  If we run too quickly then zombies will stop following us; stragglers will be eaten.  Bring your smartphone & earphones and install the Zombie Jog app."
+  }
+]

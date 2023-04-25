@@ -1,0 +1,20 @@
+[
+  {
+    "messageUID": 0,
+    "sender": 0,
+    "recipients": 1,
+    "timestamp": "2023-04-24T21:56Z",
+    "wasSent": true,
+    "wasReceived": false,
+    "text": "Please join me for the Zombie Jog.  Also, what was that fruit that you gave me this morning?"
+  },
+  {
+    "messageUID": 1,
+    "sender": 2,
+    "recipients": 1,
+    "timestamp": "2023-04-24T21:57Z",
+    "wasSent": true,
+    "wasReceived": true,
+    "text": "I'm sorry, but I won't be joining you for the Bike & Blade.  Thanks for the invite, though!"
+  }
+]
