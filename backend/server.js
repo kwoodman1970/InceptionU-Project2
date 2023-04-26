@@ -1,13 +1,15 @@
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
-import usersData from "./users.json";
-import friendsData from "./friends.json";
+import fs from "fs";
+
+const users = JSON.parse(fs.readFileSync("./users.json"));
+const friends = JSON.parse(fs.readFileSync("./friends.json"));
 
 const app = express();
 app.use(express.json());
 
-const users = { users: [...usersData.users] };
-let friends = { friends: [...friendsData.friends] };
+// const users = { users: [...usersData.users] };
+// let friends = { friends: [...friendsData.friends] };
 
 app.get("/users", (req, res) => {
   res.json(users);
