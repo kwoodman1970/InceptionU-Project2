@@ -2,24 +2,24 @@
   {
     "userUID":  0,
     "name":  "Adam",
-    "createdActivities":	[],
+    "createdActivities":	[0, 2],
     "joinedActivities":	 [],
-    "friendsList":	 [],
+    "friendsList":	 [1],
     "reviews":	 []
   },
   {
     "userUID":  1,
     "name":  "Eve",
-    "createdActivities":	[],
-    "joinedActivities":	 [],
-    "friendsList":	 [],
+    "createdActivities":	[1],
+    "joinedActivities":	 [0],
+    "friendsList":	 [0],
     "reviews":	 []
   },
   {
     "userUID":  2,
     "name":  "Serpent",
     "createdActivities":	[],
-    "joinedActivities":	 [],
+    "joinedActivities":	 [0],
     "friendsList":	 [],
     "reviews":	 []
   }
