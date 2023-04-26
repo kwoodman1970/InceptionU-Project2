@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
 
   /user/{id}:
     get:
@@ -69,7 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
     patch:
       summary: Update a specific user.
       description: Update information about the user identified by {id}.
@@ -93,13 +93,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
         "404":
           description: User not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
     delete:
       summary: Delete a specific user.
       description: Removes the user identified by {id} from the system (as well as any related data).
@@ -116,13 +116,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
         "404":
           description: User not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
 
   /activity:
     post:
@@ -147,7 +147,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
 
   /activity/{id}:
     get:
@@ -172,7 +172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
     patch:
       summary: Update a specific activity.
       description: Update information about the activity identified by {id}.
@@ -196,13 +196,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
         "404":
           description: Activity not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
     delete:
       summary: Delete a specific activity.
       description: Removes the activity identified by {id} from the system (as well as any related data).
@@ -219,13 +219,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
         "404":
           description: Activity not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
 
   /message:
     post:
@@ -250,7 +250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
 
   /message/{id}:
     get:
@@ -275,7 +275,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
     patch:
       summary: Update a specific message.
       description: Update information about the message identified by {id}.
@@ -299,13 +299,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
         "404":
           description: Message not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
     delete:
       summary: Delete a specific message.
       description: Removes the message identified by {id} from the system.
@@ -322,13 +322,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
         "404":
           description: message not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: "#/components/schemas/ServerMessage"
 
 components:
   schemas:
@@ -388,11 +388,11 @@ components:
         messageUID:
           $ref: "#/components/schemas/UID"
         sender:
-          $ref: "#/components/schemas/UID"
+          $ref: "#/components/schemas/UserInfo"
         recipients:
           type: array
           items:
-            $ref: "#/components/schemas/UID"
+            $ref: "#/components/schemas/UserInfo"
         timestamp:
           type: string
           format: date-time
@@ -413,7 +413,7 @@ components:
         - type: integer
         - type: string
 
-    Message:
+    ServerMessage:
       type: object
       properties:
         msg:
