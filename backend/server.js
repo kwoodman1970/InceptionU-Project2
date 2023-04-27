@@ -20,7 +20,7 @@ app.use(express.json());
 // const users = { users: [...usersData.users] };
 // let friends = { friends: [...friendsData.friends] };
 
-// This piece serves the OpenAPI spec:
+// This piece serves the OpenAPI spec
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
 
 // This piece validates requests & responses against the OpenAPI spec
@@ -48,9 +48,7 @@ app.get("/users", (req, res) => {
 
 app.get("/users/:id/friends", (req, res) => {
   const userId = req.params.id;
-  const userFriends = friends.friends.filter(
-    (friend) => friend.userId === userId
-  );
+  const friends = friends.friends.filter((friend) => friend.userId === userId);
 
   res.json(friends);
 });

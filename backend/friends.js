@@ -3,9 +3,11 @@ import { validate } from "express-openapi-validator";
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+import users from "./users.json";
+import friends from "./friends.json";
 
-const usersData = JSON.parse(fs.readFileSync("./users.json"));
-const friendsData = JSON.parse(fs.readFileSync("./friends.json"));
+const users = JSON.parse(fs.readFileSync("./users.json"));
+const friends = JSON.parse(fs.readFileSync("./friends.json"));
 
 const app = express();
 app.use(express.json());
@@ -24,11 +26,16 @@ app.get("/users/:id/friends", (req, res) => {
   res.json(friends);
 });
 
-app.get("/users/:id/friends", (req, res) => {
-  const userId = req.params.id;
-  const userFriends = friends.friends.filter(
-    (friend) => friend.userId === userId
-  );
+// The following piece is from server.js, but written a bit differently
+// from the above app.get method
+// It declares a couple of new variables, but is the above method
+// simpler/good enough?
+
+// app.get("/users/:id/friends", (req, res) => {
+//   const userId = req.params.id;
+//   const userFriends = friends.friends.filter(
+//     (friend) => friend.userId === userId
+//   );
 
   res.json(userFriends);
 });

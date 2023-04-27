@@ -8,7 +8,7 @@ import users from "./users.json";
 
 // Looks like I can import/declare users first, then make it a const?
 // This is a global declaration, but there is another const users nested
-// inside { } a bit further down...
+// inside { } a bit further down in app.post...
 const users = JSON.parse(fs.readFileSync("./users.json"));
 
 const app = express();
