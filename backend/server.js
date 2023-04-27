@@ -30,6 +30,8 @@ app.use(
   })
 );
 
+// This returns the entire (users) object
+// Do I need all the users at once, tho?
 app.get("/users", (req, res) => {
   res.json(users);
 });

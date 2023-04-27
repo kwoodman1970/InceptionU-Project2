@@ -22,15 +22,14 @@ app.use(
   })
 );
 
-app.get("/users/:id/friends", (req, res) => {
-  res.json(friends);
-});
+// The following responds with the entire (friends) object,
+// which may contain friends of all users...
 
-// The following piece is from server.js, but written a bit differently
-// from the above app.get method
-// It declares a couple of new variables, but is the above method
-// simpler/good enough?
+// app.get("/users/:id/friends", (req, res) => {
+//   res.json(friends);
+// });
 
+// This returns only the friends of the user whose ID is specified in the request URL
 app.get("/users/:id/friends", (req, res) => {
   const userId = req.params.id;
   const userFriends = friends.friends.filter(
