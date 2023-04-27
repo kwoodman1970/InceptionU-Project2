@@ -22,34 +22,34 @@ app.post("/users/:id/friends", (req, res) => {
   fs.readFile("friends.json", (err, data) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error reading user friends from file");
+      res.status(500).send("Error reading user's friend(s) from file");
       return;
     }
 
     // This parses JSON data from file.
-    const users = JSON.parse(data);
+    const friends = JSON.parse(data);
 
     // This generate a unique ID for the new user.
-    const newUserId = Date.now().toString();
-
+    const newFriendId = Date.now().toString();
+    
     // This adds the new user to the list of existing users.
-    const newUser = {
-      id: newUserId,
-      username: req.body.username,
+    const newFriend = {
+        id: newFriendId,
+        username: req.body.username,
       password: req.body.password,
     };
-    users.push(newUser);
+    users.push(newFriend);
 
     // This writes updated list of users back to file in fs.
-    fs.writeFile("users.json", JSON.stringify(users), (err) => {
+    fs.writeFile("friends.json", JSON.stringify(users), (err) => {
       if (err) {
-        console.error(err);
-        res.status(500).send("Error writing users to file");
-      } else {
-        res.send("User created successfully");
-      }
+          console.error(err);
+          res.status(500).send("Error writing user's friend to file");
+        } else {
+            res.send("Friend created successfully");
+        }
     });
-  });
+});
 });
 
 // app.listen(4200, () => console.log("Server started on port 4200"));
