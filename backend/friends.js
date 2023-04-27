@@ -1,5 +1,7 @@
 import express from "express";
-import { validate } from "express-openapi-validator";
+// import { validate } from "express-openapi-validator";
+import pkg from 'express-openapi-validator';
+const { validate } = pkg;
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";

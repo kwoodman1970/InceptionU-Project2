@@ -1,5 +1,9 @@
 import express from "express";
-import { validate } from "express-openapi-validator";
+import * as OpenApiValidator from "express-openapi-validator";
+// import { validate } from "express-openapi-validator";
+import pkg from "express-openapi-validator";
+const { validate } = pkg;
+// const validate = validator.validate;
 import path from "path";
 
 // @@@Not using this right now, b/c uudiv4@@@
@@ -24,11 +28,30 @@ app.use(express.json());
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
 
 // This piece validates requests & responses against the OpenAPI spec
+// app.use(
+//   validate({
+//     apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+//   })
+// );
+
+// This piece also does the same???
+// This is from the documentation and so actually works!!
 app.use(
-  validate({
-    apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+  OpenApiValidator.middleware({
+    apiSpec: "./openapi.yaml",
+    validateRequests: true, // (default)
+    validateResponses: true, // false by default
   })
 );
+
+// This is the error handler for the above block of code for OpenAPI
+app.use((err, req, res, next) => {
+  // format error
+  res.status(err.status || 500).json({
+    message: err.message,
+    errors: err.errors,
+  });
+});
 
 // This returns the entire (users) object
 // Do I need all the users at once, tho?
