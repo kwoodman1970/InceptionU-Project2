@@ -4,7 +4,7 @@ import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import users from "./users.json" assert {type: "json"};
-import activities from "./activities.json";
+import activities from "./activities.json" assert {type: "json"};
 
 const users = JSON.parse(fs.readFileSync("./users.json"));
 const activities = JSON.parse(fs.readFileSync("./activities.json"));

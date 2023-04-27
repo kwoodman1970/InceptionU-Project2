@@ -11,7 +11,7 @@ import path from "path";
 // import fs from "fs";
 
 import users from "./users.json" assert { type: "json" };
-import friends from "./friends.json" assert {type: "json"};
+import friends from "./friends.json" assert { type: "json" };
 
 const app = express();
 app.use(express.json());
