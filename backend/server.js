@@ -1,41 +1,13 @@
 import express from "express";
-// import { v4 as uuidv4 } from "uuid";
-import fs from "fs";
-import fetch from "node-fetch";
-
-const usersData = JSON.parse(fs.readFileSync("./users.json"));
-const friendsData = JSON.parse(fs.readFileSync("./friends.json"));
+import { v4 as uuidv4 } from "uuid";
+import usersData from "./users.json";
+import friendsData from "./friends.json";
 
 const app = express();
 app.use(express.json());
 
-// const users = { users: [...usersData.users] };
-// let friends = { friends: [...friendsData.friends] };
-
-// CORS for API requests.
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET");
-  next();
-});
-
-// This grabs the Trails API from City of Calgary
-app.get("/data", async (req, res) => {
-  try {
-    const response = await fetch(
-      "https://data.calgary.ca/resource/tfmd-grpe.json"
-    );
-    const data = await response.json();
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error fetching data from API");
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
+const users = { users: [...usersData.users] };
+let friends = { friends: [...friendsData.friends] };
 
 app.get("/users", (req, res) => {
   res.json(users);

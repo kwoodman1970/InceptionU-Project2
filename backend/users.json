@@ -2,25 +2,45 @@
   {
     "userUID":  0,
     "name":  "Adam",
+<<<<<<< HEAD
     "createdActivities":	[],
     "joinedActivities":	 [],
     "friendsList":	 [],
+=======
+    "createdActivities":	[0, 2],
+    "joinedActivities":	 [],
+    "friendsList":	 [1],
+>>>>>>> main
     "reviews":	 []
   },
   {
     "userUID":  1,
     "name":  "Eve",
+<<<<<<< HEAD
     "createdActivities":	[],
     "joinedActivities":	 [],
     "friendsList":	 [],
+=======
+    "createdActivities":	[1],
+    "joinedActivities":	 [0],
+    "friendsList":	 [0],
+>>>>>>> main
     "reviews":	 []
   },
   {
     "userUID":  2,
     "name":  "Serpent",
     "createdActivities":	[],
+<<<<<<< HEAD
     "joinedActivities":	 [],
     "friendsList":	 [],
     "reviews":	 []
   }
 ]
+=======
+    "joinedActivities":	 [0],
+    "friendsList":	 [],
+    "reviews":	 []
+  }
+]
+>>>>>>> main
