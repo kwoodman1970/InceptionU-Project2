@@ -4,8 +4,12 @@ import path from "path";
 // Not using this right now, b/c uudiv4
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+import users from "./users.json";
 
-const usersData = JSON.parse(fs.readFileSync("./users.json"));
+// Looks like I can import/declare users first, then make it a const?
+// This is a global declaration, but there is another const users nested
+// inside { } a bit further down...
+const users = JSON.parse(fs.readFileSync("./users.json"));
 
 const app = express();
 app.use(express.json());
@@ -47,6 +51,8 @@ app.post("/users", (req, res) => {
     }
 
     // This parses JSON data from file.
+    // This is the 2nd declaration of const users, but inside the app.post
+    // function's function
     const users = JSON.parse(data);
 
     // This generate a unique ID for the new user.
