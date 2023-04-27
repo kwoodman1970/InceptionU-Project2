@@ -1,9 +1,9 @@
 import express from "express";
 import * as OpenApiValidator from "express-openapi-validator";
+// The following import {validate} statement doesn't work, use the ABOVE from the documentation for the library!
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
-// const validate = validator.validate;
 import path from "path";
 
 // @@@Not using this right now, b/c uudiv4@@@
