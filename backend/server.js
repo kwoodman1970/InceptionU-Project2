@@ -10,8 +10,8 @@ import path from "path";
 // Does this make the code more efficient, performance-wise?@@@
 // import fs from "fs";
 
-import users from "./users.json";
-import friends from "./friends.json";
+import users from "./users.json" assert { type: "json" };
+import friends from "./friends.json" assert {type: "json"};
 
 const app = express();
 app.use(express.json());

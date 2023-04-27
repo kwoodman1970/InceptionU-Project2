@@ -4,7 +4,7 @@ import path from "path";
 // Not using this right now, b/c uudiv4
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import users from "./users.json";
+import users from "./users.json" assert { type: "json" };
 
 // Looks like I can import/declare users first, then make it a const?
 // This is a global declaration, but there is another const users nested

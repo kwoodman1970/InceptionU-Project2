@@ -3,8 +3,8 @@ import { validate } from "express-openapi-validator";
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import users from "./users.json";
-import friends from "./friends.json";
+import users from "./users.json" assert {type: "json"};
+import friends from "./friends.json" assert {type: "json"};
 
 const users = JSON.parse(fs.readFileSync("./users.json"));
 const friends = JSON.parse(fs.readFileSync("./friends.json"));

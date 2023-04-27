@@ -3,7 +3,7 @@ import { validate } from "express-openapi-validator";
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import users from "./users.json";
+import users from "./users.json" assert {type: "json"};
 import activities from "./activities.json";
 
 const users = JSON.parse(fs.readFileSync("./users.json"));
