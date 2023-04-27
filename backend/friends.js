@@ -31,11 +31,11 @@ app.get("/users/:id/friends", (req, res) => {
 // It declares a couple of new variables, but is the above method
 // simpler/good enough?
 
-// app.get("/users/:id/friends", (req, res) => {
-//   const userId = req.params.id;
-//   const userFriends = friends.friends.filter(
-//     (friend) => friend.userId === userId
-//   );
+app.get("/users/:id/friends", (req, res) => {
+  const userId = req.params.id;
+  const userFriends = friends.friends.filter(
+    (friend) => friend.userId === userId
+  );
 
   res.json(userFriends);
 });
