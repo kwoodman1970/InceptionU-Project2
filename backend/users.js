@@ -1,4 +1,7 @@
 import express from "express";
+import { validate } from "express-openapi-validator";
+import path from "path";
+// Not using this right now, b/c uudiv4
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 
@@ -7,10 +10,21 @@ const usersData = JSON.parse(fs.readFileSync("./users.json"));
 const app = express();
 app.use(express.json());
 
+// This piece serves the OpenAPI spec
+app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
+
+// This piece validates requests & responses against the OpenAPI spec
+app.use(
+  validate({
+    apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+  })
+);
+
 app.get("/users", (req, res) => {
   res.json(users);
 });
 
+// Not using this right now, b/c uudiv4
 // app.post("/users", (req, res) => {
 //   const newUser = {
 //     id: uuidv4(),
@@ -22,6 +36,7 @@ app.get("/users", (req, res) => {
 //   res.status(201).json(newUser);
 // });
 
+// This uses the fs module instead of uuidv4
 app.post("/users", (req, res) => {
   // Read existing users from file
   fs.readFile("users.json", (err, data) => {

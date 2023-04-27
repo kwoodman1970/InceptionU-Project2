@@ -1,4 +1,6 @@
 import express from "express";
+import { validate } from "express-openapi-validator";
+import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 
@@ -7,6 +9,20 @@ const friendsData = JSON.parse(fs.readFileSync("./friends.json"));
 
 const app = express();
 app.use(express.json());
+
+// This piece serves the OpenAPI spec
+app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
+
+// This piece validates requests & responses against the OpenAPI spec
+app.use(
+  validate({
+    apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+  })
+);
+
+app.get("/users/:id/friends", (req, res) => {
+  res.json(friends);
+});
 
 app.get("/users/:id/friends", (req, res) => {
   const userId = req.params.id;
@@ -18,7 +34,7 @@ app.get("/users/:id/friends", (req, res) => {
 });
 
 app.post("/users/:id/friends", (req, res) => {
-    // Read existing user friends from file
+  // This reads existing user friends from file
   fs.readFile("friends.json", (err, data) => {
     if (err) {
       console.error(err);
@@ -31,11 +47,11 @@ app.post("/users/:id/friends", (req, res) => {
 
     // This generate a unique ID for the new user.
     const newFriendId = Date.now().toString();
-    
-    // This adds the new user to the list of existing users.
+
+    // This adds the new user friend to the list of existing friends.
     const newFriend = {
-        id: newFriendId,
-        username: req.body.username,
+      id: newFriendId,
+      username: req.body.username,
       password: req.body.password,
     };
     users.push(newFriend);
@@ -43,13 +59,13 @@ app.post("/users/:id/friends", (req, res) => {
     // This writes updated list of users back to file in fs.
     fs.writeFile("friends.json", JSON.stringify(users), (err) => {
       if (err) {
-          console.error(err);
-          res.status(500).send("Error writing user's friend to file");
-        } else {
-            res.send("Friend created successfully");
-        }
+        console.error(err);
+        res.status(500).send("Error writing user's friend to file");
+      } else {
+        res.send("Friend created successfully");
+      }
     });
-});
+  });
 });
 
 // app.listen(4200, () => console.log("Server started on port 4200"));

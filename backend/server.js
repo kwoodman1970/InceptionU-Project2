@@ -1,18 +1,33 @@
 import express from "express";
-import { v4 as uuidv4 } from "uuid";
-import usersData from "./users.json";
-import friendsData from "./friends.json";
+import { validate } from "express-openapi-validator";
+import path from "path";
+// Not using this right now, b/c uudiv4
+// import { v4 as uuidv4 } from "uuid";
+import users from "./users.json";
+import friends from "./friends.json";
 
 const app = express();
 app.use(express.json());
 
-const users = { users: [...usersData.users] };
-let friends = { friends: [...friendsData.friends] };
+// Not using this right now, b/c uudiv4
+// const users = { users: [...usersData.users] };
+// let friends = { friends: [...friendsData.friends] };
+
+// This piece serves the OpenAPI spec
+app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
+
+// This piece validates requests & responses against the OpenAPI spec
+app.use(
+  validate({
+    apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+  })
+);
 
 app.get("/users", (req, res) => {
   res.json(users);
 });
 
+// Not using this right now, b/c uuidv4
 // app.post("/users", (req, res) => {
 //   const newUser = {
 //     id: uuidv4(),
@@ -33,16 +48,17 @@ app.get("/users/:id/friends", (req, res) => {
   res.json(userFriends);
 });
 
-app.post("/users/:id/friends", (req, res) => {
-  const userId = req.params.id;
-  const newFriend = {
-    id: uuidv4(),
-    userId: userId,
-    friendId: req.body.friendId,
-  };
+// Not using this right now, b/c uuidv4
+// app.post("/users/:id/friends", (req, res) => {
+//   const userId = req.params.id;
+//   const newFriend = {
+//     id: uuidv4(),
+//     userId: userId,
+//     friendId: req.body.friendId,
+//   };
 
-  friends.friends.push(newFriend);
-  res.status(201).json(newFriend);
-});
+//   friends.friends.push(newFriend);
+//   res.status(201).json(newFriend);
+// });
 
 app.listen(4200, () => console.log("Server started on port 4200"));
