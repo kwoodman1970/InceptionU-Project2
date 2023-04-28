@@ -356,7 +356,7 @@ components:
           items:
             type: object
             properties:
-              userUID:
+              user:
                 $ref: "#/components/schemas/UserInfo"
               details:
                 type: string
