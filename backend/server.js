@@ -14,6 +14,7 @@ import path from "path";
 // Does this make the code more efficient, performance-wise?@@@
 // import fs from "fs";
 
+// Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert { type: "json" };
 import friends from "./friends.json" assert { type: "json" };
 

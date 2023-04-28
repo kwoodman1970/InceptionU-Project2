@@ -5,11 +5,12 @@ const { validate } = pkg;
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+// Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert {type: "json"};
 import friends from "./friends.json" assert {type: "json"};
 
-const users = JSON.parse(fs.readFileSync("./users.json"));
-const friends = JSON.parse(fs.readFileSync("./friends.json"));
+// const users = JSON.parse(fs.readFileSync("./users.json"));
+// const friends = JSON.parse(fs.readFileSync("./friends.json"));
 
 const app = express();
 app.use(express.json());
