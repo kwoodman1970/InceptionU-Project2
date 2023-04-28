@@ -1,4 +1,5 @@
 import express from "express";
+import * as OpenApiValidator from "express-openapi-validator";
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
@@ -19,9 +20,19 @@ app.use(express.json());
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
 
 // This piece validates requests & responses against the OpenAPI spec
+// But it doesn't actually work here... use the documentation version below!
+// app.use(
+//   validate({
+//     apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+//   })
+// );
+
+// This is from the documentation and so actually works!!
 app.use(
-  validate({
-    apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+  OpenApiValidator.middleware({
+    apiSpec: "./openapi.yaml",
+    validateRequests: true, // (default)
+    validateResponses: true, // false by default
   })
 );
 
@@ -79,7 +90,7 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.listen(port, () => {
+app.listen(4200, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
 

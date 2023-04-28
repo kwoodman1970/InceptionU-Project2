@@ -1,10 +1,12 @@
 import express from "express";
+import * as OpenApiValidator from "express-openapi-validator";
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+// Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert { type: "json" };
 import activities from "./activities.json" assert { type: "json" };
 
@@ -18,9 +20,19 @@ app.use(express.json());
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
 
 // This piece validates requests & responses against the OpenAPI spec
+// But it doesn't actually work here... use the documentation version below!
+// app.use(
+//   validate({
+//     apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+//   })
+// );
+
+// This is from the documentation and so actually works!!
 app.use(
-  validate({
-    apiSpec: path.join("/openapi.yaml", "openapi.yaml"),
+  OpenApiValidator.middleware({
+    apiSpec: "./openapi.yaml",
+    validateRequests: true, // (default)
+    validateResponses: true, // false by default
   })
 );
 
