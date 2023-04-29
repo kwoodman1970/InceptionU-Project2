@@ -5,6 +5,7 @@ import * as OpenApiValidator from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
 import path from "path";
+import fetch from "node-fetch";
 
 // @@@Not using this right now, b/c uudiv4@@@
 // import { v4 as uuidv4 } from "uuid";
@@ -20,6 +21,30 @@ import friends from "./friends.json" assert { type: "json" };
 
 const app = express();
 app.use(express.json());
+
+// CORS for API requests.
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // I'm a little worried about using the * wildcard here,
+  // since it's been declared above while importing
+  // from the OpenApiValidator...
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  next();
+});
+
+// This grabs the Trails API from City of Calgary
+app.get("/data", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://data.calgary.ca/resource/tfmd-grpe.json"
+    );
+    const data = await response.json();
+    res.send(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching data from API");
+  }
+});
 
 // @@@@Not using these right now, b/c uudiv4@@@
 // const users = { users: [...usersData.users] };
