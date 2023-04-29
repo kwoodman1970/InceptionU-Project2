@@ -26,6 +26,9 @@ const app2 = express();
 app.use(express.json());
 app2.use(cors());
 
+// This randomizes the port number
+// const port = ~~(Math.random() * 65535);
+
 // CORS for API requests.
 app2.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
