@@ -1,6 +1,8 @@
 import express from "express";
+import cors from "cors";
 import * as OpenApiValidator from "express-openapi-validator";
-// The following import {validate} statement doesn't work, use the ABOVE from the documentation for the library!
+// The following import {validate} statement BELOW doesn't work,
+// use the ABOVE from the documentation for the library!
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
@@ -20,14 +22,16 @@ import users from "./users.json" assert { type: "json" };
 import friends from "./friends.json" assert { type: "json" };
 
 const app = express();
+const app2 = express();
 app.use(express.json());
+app2.use(cors());
 
 // CORS for API requests.
-app.use((req, res, next) => {
+app2.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   // I'm a little worried about using the * wildcard here,
   // since it's been declared above while importing
-  // from the OpenApiValidator...
+  // from the OpenApiValidator library...
   res.setHeader("Access-Control-Allow-Methods", "GET");
   next();
 });
