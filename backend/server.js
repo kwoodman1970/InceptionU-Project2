@@ -22,35 +22,21 @@ import users from "./users.json" assert { type: "json" };
 import friends from "./friends.json" assert { type: "json" };
 
 const app = express();
-const app2 = express();
+const port = 4200;
 app.use(express.json());
-app2.use(cors());
+app.use(cors());
 
 // This randomizes the port number
 // const port = ~~(Math.random() * 65535);
 
 // CORS for API requests.
-app2.use((req, res, next) => {
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   // I'm a little worried about using the * wildcard here,
   // since it's been declared above while importing
   // from the OpenApiValidator library...
   res.setHeader("Access-Control-Allow-Methods", "GET");
   next();
-});
-
-// This grabs the Trails API from City of Calgary
-app.get("/data", async (req, res) => {
-  try {
-    const response = await fetch(
-      "https://data.calgary.ca/resource/tfmd-grpe.json"
-    );
-    const data = await response.json();
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error fetching data from API");
-  }
 });
 
 // @@@@Not using these right now, b/c uudiv4@@@
@@ -84,6 +70,20 @@ app.use((err, req, res, next) => {
     message: err.message,
     errors: err.errors,
   });
+});
+
+// This grabs the Trails API from City of Calgary
+app.get("/data", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://data.calgary.ca/resource/tfmd-grpe.json"
+    );
+    const data = await response.json();
+    res.send(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching data from API");
+  }
 });
 
 // This returns the entire (users) object
