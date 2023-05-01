@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./styles.css";
 import { NewEventForm } from "./components/NewEventForm";
 import { EventList } from "./components/EventList";
 

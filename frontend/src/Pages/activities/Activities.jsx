@@ -1,3 +1,3 @@
 export default function Activities() {
-  return <div className=" activities"></div>;
+  return <div className="activities"></div>;
 }

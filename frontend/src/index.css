@@ -12,9 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
+} */
 
-a {
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
@@ -67,10 +67,32 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
 :root {
   --primary: #23bcb7;
   --secondary: #480d15;
 }
+body {
+  margin: 0;
+  padding: 25px;
+  font-family: "Georgia";
+  background: #343c6d;
+}
+* {
+  color: #0e0101;
+  margin: 0;
+}
+p {
+  justify-content: center;
+  margin: 25px 0;
+}
+button {
+  border: 5;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 header nav {
   display: flex;
   gap: 18px;
@@ -147,4 +169,31 @@ form textarea {
 }
 form label span {
   margin-bottom: 10px;
+}
+.auth-form-container {
+  text-align: center;
+  display: flex;
+  min-height: 100%;
+  max-width: 100%;
+  align-items: center;
+  background-image: linear-gradient(79deg, #fcfced, #fcedfc, #ebf6ff);
+}
+.auth-form-container,
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+.auth-form-container label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+.auth-form-container button {
+  border: none;
+  background-color: none;
+  border: flex;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
 }
