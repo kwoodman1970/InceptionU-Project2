@@ -15,6 +15,20 @@ import users from "./users.json" assert { type: "json" };
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
+// This randomizes the port number
+const port = ~~(Math.random() * 65535);
+
+// CORS for API requests.
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // I'm a little worried about using the * wildcard here,
+  // since it's been declared above while importing
+  // from the OpenApiValidator library...
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  next();
+});
 
 // This piece serves the OpenAPI spec
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
