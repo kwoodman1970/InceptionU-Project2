@@ -101,15 +101,6 @@ app.post("/users", (req, res) => {
       password: password // req.body.password
     };
 
-    // Generates a random salt
-    const salt = bcrypt.genSaltSync(10);
-
-    // Hashes the password using the salt
-    const hash = bcrypt.hashSync(password, salt);
-
-    // Creates a new user object with the hashed password and salt
-    const newUser = { id: Date.now().toString(), username, password: hash };
-
     // Adds the new user to the user data
     users.push(newUser);
 
