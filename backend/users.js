@@ -1,11 +1,12 @@
 import express from "express";
 import * as OpenApiValidator from "express-openapi-validator";
-// import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
+import cors from "cors";
 import path from "path";
 // Not using this right now, b/c uudiv4
 // import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcrypt";
 import fs from "fs";
 // This is a global declaration, but there is another const users nested
 // inside { } a bit further down in app.post...
@@ -81,15 +82,35 @@ app.post("/users", (req, res) => {
     // function's function
     const users = JSON.parse(data);
 
+    // Destructuring assignment syntax, extracts username/password properties 
+    // from the req.body object, can store them in separate variables
+    const { username, password } = req.body;
+
     // This generate a unique ID for the new user.
     const newUserId = Date.now().toString();
+
+    // This checks if user already exists
+    if (users.find(user => user.username === username)) {
+     return res.status(400).send("User already exists"); 
+    }
 
     // This adds the new user to the list of existing users.
     const newUser = {
       id: newUserId,
-      username: req.body.username,
-      password: req.body.password,
+      username: username // req.body.username 
+      password: password // req.body.password
     };
+
+    // Generates a random salt
+    const salt = bcrypt.genSaltSync(10);
+
+    // Hashes the password using the salt
+    const hash = bcrypt.hashSync(password, salt);
+
+    // Creates a new user object with the hashed password and salt
+    const newUser = { id: Date.now().toString(), username, password: hash };
+
+    // Adds the new user to the user data
     users.push(newUser);
 
     // This writes updated list of users back to file in fs.
