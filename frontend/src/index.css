@@ -141,6 +141,25 @@ main {
 .help-layout nav a.active {
   background: var(--primary);
 }
+
+/*activities-layout*/
+.activities-layout nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.activities-layout nav a {
+  padding: 10px;
+  border: 2px solid whitesmoke;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.activities-layout nav a:hover {
+  border-color: var(--primary);
+}
 /* FAQ */
 .faq .question {
   background: rebeccapurple;
