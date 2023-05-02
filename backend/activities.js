@@ -1,4 +1,7 @@
 import express from "express";
+import mapboxgl from "mapbox-gl";
+mapboxgl.accessToken =
+  "pk.eyJ1IjoibW90b2NsaWNrIiwiYSI6ImNsZ3NvbGJvazBsZW8zZXM4MGo2YzZrMWsifQ.EqLZAYFlhh58IuQ1UmJYUw";
 import * as OpenApiValidator from "express-openapi-validator";
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
