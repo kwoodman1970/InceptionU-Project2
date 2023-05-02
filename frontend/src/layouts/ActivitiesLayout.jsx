@@ -8,7 +8,7 @@ export default function ActivitiesLayout() {
       <p>Join or Create an activity!!!</p>
       <nav>
         <NavLink to="createactivities">Create Activity</NavLink>
-        <NavLink to="joinactivity">Join Activity</NavLink>
+        <NavLink to="joinedactivities">Join Activity</NavLink>
       </nav>
 
       <Outlet />

@@ -18,6 +18,7 @@ import Activities from "./Pages/activities/Activities";
 import RootLayout from "./layouts/RootLayout";
 import HelpLayout from "./layouts/HelpLayout";
 import ActivitiesLayout from "./layouts/ActivitiesLayout";
+import Joinactivity from "./Pages/activities/Joinactivity";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,8 @@ const router = createBrowserRouter(
       </Route>
       <Route path="activities" element={<ActivitiesLayout />}>
         <Route path="createactivities" element={<Activities />} />
+        <Route path="joinedactivities" element={<Joinactivity />} />
+
         {/* <Route index element={<Activities />} /> */}
       </Route>
 
