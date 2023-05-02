@@ -29,7 +29,8 @@ const router = createBrowserRouter(
         <Route path="contact" element={<Contact />} />
       </Route>
       <Route path="activities" element={<ActivitiesLayout />}>
-        <Route index element={<Activities />} />
+        <Route path="createactivities" element={<Activities />} />
+        {/* <Route index element={<Activities />} /> */}
       </Route>
 
       <Route path="*" element={<NotFound />} />
