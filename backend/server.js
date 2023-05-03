@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import * as OpenApiValidator from "express-openapi-validator";
@@ -21,8 +22,10 @@ import fetch from "node-fetch";
 import users from "./users.json" assert { type: "json" };
 import friends from "./friends.json" assert { type: "json" };
 
+dotenv.config();
+
 const app = express();
-const port = 4200;
+const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
@@ -124,4 +127,4 @@ app.get("/users/:id/friends", (req, res) => {
 //   res.status(201).json(newFriend);
 // });
 
-app.listen(4200, () => console.log("Server started on port 4200"));
+app.listen(port, () => console.log(`Server started on port ${port}`));
