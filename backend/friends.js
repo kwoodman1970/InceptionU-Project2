@@ -6,6 +6,8 @@ const { validate } = pkg;
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+import dotenv from "dotenv";
+dotenv.config();
 // Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert { type: "json" };
 import friends from "./friends.json" assert { type: "json" };
@@ -15,6 +17,8 @@ import friends from "./friends.json" assert { type: "json" };
 
 const app = express();
 app.use(express.json());
+
+const PORT = process.env.PORT || 4200;
 
 // This piece serves the OpenAPI spec
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
@@ -90,6 +94,6 @@ app.post("/users/:id/friends", (req, res) => {
 
 // app.listen(4200, () => console.log("Server started on port 4200"));
 
-app.listen(4200, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`);
 });

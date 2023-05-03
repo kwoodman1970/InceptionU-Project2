@@ -8,6 +8,8 @@ import pkg from "express-openapi-validator";
 const { validate } = pkg;
 import path from "path";
 import fetch from "node-fetch";
+import dotenv from "dotenv";
+dotenv.config();
 
 // @@@Not using this right now, b/c uudiv4@@@
 // import { v4 as uuidv4 } from "uuid";
@@ -22,7 +24,7 @@ import users from "./users.json" assert { type: "json" };
 import friends from "./friends.json" assert { type: "json" };
 
 const app = express();
-const port = 4200;
+const PORT = process.env.PORT || 4200;
 app.use(express.json());
 app.use(cors());
 
@@ -124,4 +126,4 @@ app.get("/users/:id/friends", (req, res) => {
 //   res.status(201).json(newFriend);
 // });
 
-app.listen(4200, () => console.log("Server started on port 4200"));
+app.listen(PORT, () => console.log(`Server started on ${PORT}`));
