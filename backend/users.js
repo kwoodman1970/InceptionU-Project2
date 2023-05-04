@@ -23,7 +23,7 @@ app.use(cors());
 // This randomizes the port number
 // const port = ~~(Math.random() * 65535);
 
-const PORT = process.env.PORT || 4200;
+const PORT = process.env.PORT || 4201;
 
 // CORS for API requests.
 app.use((req, res, next) => {
@@ -163,12 +163,3 @@ app.post("/auth", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
 });
-
-// Should this be in friends.js?
-
-// app.get("/users/:id/friends", (req, res) => {
-//   const userId = req.params.id;
-//   const userFriends = friends.friends.filter(
-//     (friend) => friend.userId === userId
-//   );
-// });

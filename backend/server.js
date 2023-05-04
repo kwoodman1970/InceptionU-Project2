@@ -28,7 +28,7 @@ import { userInfo } from "os";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4200;
+const PORT = process.env.PORT || 4201;
 app.use(express.json());
 app.use(cors());
 
