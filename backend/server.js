@@ -5,10 +5,12 @@ import cors from "cors";
 // The following import {validate} statement BELOW doesn't work,
 // use the ABOVE from the documentation for the library!
 // import { validate } from "express-openapi-validator";
-// import pkg from "express-openapi-validator";
-// const { validate } = pkg;
-// import path from "path";
-// import fetch from "node-fetch";
+import pkg from "express-openapi-validator";
+const { validate } = pkg;
+import path from "path";
+import fetch from "node-fetch";
+import dotenv from "dotenv";
+dotenv.config();
 
 // @@@Not using this right now, b/c uudiv4@@@
 // import { v4 as uuidv4 } from "uuid";
@@ -26,7 +28,7 @@ import { userInfo } from "os";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = 4200;
 app.use(express.json());
 app.use(cors());
 
@@ -165,4 +167,4 @@ app.get("/users/:id/friends", (req, res) => {
 //   res.status(201).json(newFriend);
 // });
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(4200, () => console.log("Server started on port 4200"));

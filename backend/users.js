@@ -4,6 +4,8 @@ import pkg from "express-openapi-validator";
 const { validate } = pkg;
 import cors from "cors";
 import path from "path";
+import dotenv from "dotenv";
+dotenv.config();
 // Not using this right now, b/c uudiv4
 // import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
@@ -19,7 +21,9 @@ app.use(express.json());
 app.use(cors());
 
 // This randomizes the port number
-const port = ~~(Math.random() * 65535);
+// const port = ~~(Math.random() * 65535);
+
+const PORT = process.env.PORT || 4200;
 
 // CORS for API requests.
 app.use((req, res, next) => {
@@ -156,8 +160,8 @@ app.post("/auth", (req, res) => {
   res.send("Authentication successful");
 });
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`);
 });
 
 // Should this be in friends.js?

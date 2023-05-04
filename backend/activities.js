@@ -1,9 +1,14 @@
 import express from "express";
+import mapboxgl from "mapbox-gl";
+mapboxgl.accessToken =
+  "pk.eyJ1IjoibW90b2NsaWNrIiwiYSI6ImNsZ3NvbGJvazBsZW8zZXM4MGo2YzZrMWsifQ.EqLZAYFlhh58IuQ1UmJYUw";
 import * as OpenApiValidator from "express-openapi-validator";
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
 import path from "path";
+import dotenv from "dotenv";
+dotenv.config();
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 // Assertion is needed b/c it's importing a file type and not a module
@@ -17,15 +22,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const PORT = process.env.PORT || 4200;
+
 // This randomizes the port number
-const port = ~~(Math.random() * 65535);
+// const port = ~~(Math.random() * 65535);
 
 // CORS for API requests.
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  // I'm a little worried about using the * wildcard here,
-  // since it's been declared above while importing
-  // from the OpenApiValidator library...
   res.setHeader("Access-Control-Allow-Methods", "GET");
   next();
 });
@@ -60,15 +64,21 @@ app.get("/users/:id/activities", (req, res) => {
   res.json(userActivities);
 });
 
+
+app.post("/users/:id/activities", (req, res) => {
+  const userId = req.params.id;
+  const activitiesFile = `user-${userId}-activities.json`;
+
 // This adds a new activity for a user
 app.post("/users/:id/activities", (req, res) => {
+
+  
   // This reads existing user activities from file
-  fs.readFile(`user-${req.params.id}-activities.json`, (err, data) => {
+  fs.readFile(activitiesFile, (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error reading user's activity(ies) from file");
       return;
-    }
 
     // This parses JSON data from file.
     const activities = JSON.parse(data);
@@ -82,7 +92,11 @@ app.post("/users/:id/activities", (req, res) => {
       name: req.body.name,
       description: req.body.description,
       date: req.body.date,
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     };
+
+    // This adds the new activity object to existing user activities
     activities.push(newActivity);
 
     // This writes updated list of activities back to file in fs.
@@ -104,7 +118,7 @@ app.post("/users/:id/activities", (req, res) => {
 // This deletes an activity for a user
 app.delete("/users/:id/activities/:activityId", (req, res) => {
   // This reads existing user activities from file
-  fs.readFile(`user-${req.params.id}-activities.json`, (err, data) => {
+  fs.readFile(activitiesFile, (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error reading user's activity(ies) from file");
@@ -126,7 +140,7 @@ app.delete("/users/:id/activities/:activityId", (req, res) => {
 
     // This writes updated list of activities back to file in fs.
     fs.writeFile(
-      `user-${req.params.id}-activities.json`,
+      activitiesFile,
       JSON.stringify(activities),
       (err) => {
         if (err) {
@@ -140,6 +154,6 @@ app.delete("/users/:id/activities/:activityId", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`);
 });
