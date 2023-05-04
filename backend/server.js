@@ -133,17 +133,35 @@ app.get("/login", (req, res) => {
   }
 });
 
-// @@@Not using this right now, b/c uuidv4@@@
-// app.post("/users", (req, res) => {
-//   const newUser = {
-//     id: uuidv4(),
-//     username: req.body.username,
-//     password: req.body.password,
-//   };
+app.post("/user", (req, res) => {
+  const newUser = req.body.userInfo;
+  const password = req.body.password;
 
-//   users.users.push(newUser);
-//   res.status(201).json(newUser);
-// });
+  console.log(`Trying to register ${newUser.name} (${password})...`);
+
+  if (newUser.name == password) {
+    const userInfo = users.find(element => element.name == newUser.name);
+
+    if (userInfo == null) {
+      newUser.userUID = users.length;
+      newUser.createdActivities = [];
+      newUser.joinedActivities = [];
+      newUser.friendsList = [];
+      newUser.reviews = [];
+
+      users.push(newUser);
+
+      console.log(newUser);
+      res.send({userUID:  newUser.userUID});
+    } else {
+      res.status(403);
+      res.send({msg:  "User exists -- please log in or choose a different name"});
+    }
+  } else {
+    res.status(403);
+    res.send({msg:  "Invalid credentials"});
+  }
+});
 
 app.get("/users/:id/friends", (req, res) => {
   const userId = req.params.id;

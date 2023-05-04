@@ -45,7 +45,7 @@ const router = createBrowserRouter(
     const loggedInUser = useContext(UserContext);
     const user = loggedInUser.user;
 
-    console.log(`Logged-in user:  ${user.name}`);
+    console.log(`Logged-in user:  ${user != null ? user.name : "null"}`);
 
     return <RouterProvider router={router} />;
   }
