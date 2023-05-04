@@ -18,7 +18,7 @@ import friends from "./friends.json" assert { type: "json" };
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 4200;
+const PORT = process.env.PORT || 4201;
 
 // This piece serves the OpenAPI spec
 app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
