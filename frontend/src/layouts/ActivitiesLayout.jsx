@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useContext } from 'react'
-import {UserContext} from "../components/UserContext.jsx";
+import { UserContext } from "../components/UserContext.jsx";
 
 //import App2 from "../App2";
 

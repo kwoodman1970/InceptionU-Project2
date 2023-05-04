@@ -101,8 +101,6 @@ app.get("/login", (req, res) => {
   const name = req.query.name;
   const password = req.query.password;
 
-  console.log(`Trying to log in ${name} (${password})...`);
-
   if (name == password) {
     let userInfo = users.find(element => element.name == name);
 
@@ -121,7 +119,6 @@ app.get("/login", (req, res) => {
         array[index] = activities[element]
       });
 
-      console.log(userInfo);
       res.send(userInfo);
     } else {
       res.status(404);
@@ -133,11 +130,10 @@ app.get("/login", (req, res) => {
   }
 });
 
+// This registers a new user.
 app.post("/user", (req, res) => {
   const newUser = req.body.userInfo;
   const password = req.body.password;
-
-  console.log(`Trying to register ${newUser.name} (${password})...`);
 
   if (newUser.name == password) {
     const userInfo = users.find(element => element.name == newUser.name);
@@ -150,8 +146,6 @@ app.post("/user", (req, res) => {
       newUser.reviews = [];
 
       users.push(newUser);
-
-      console.log(newUser);
       res.send({userUID:  newUser.userUID});
     } else {
       res.status(403);

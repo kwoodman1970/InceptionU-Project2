@@ -5,7 +5,7 @@ const VITE_SERVER_URL_ROOT = import.meta.env.VITE_SERVER_URL_ROOT;
 
 export const Register = (props) => {
   const loggedInUser = useContext(UserContext);
-  const {user, setUser} = loggedInUser;
+  const setUser = loggedInUser.setUser;
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -22,25 +22,18 @@ export const Register = (props) => {
       body: JSON.stringify(newUser)
     }
 
-    console.log(`Trying to register ${name}...`);
-
     const response = await fetch(`${VITE_SERVER_URL_ROOT}/user`, init);
     const result = await response.json();
 
-    console.log(response);
-    console.log(response.statusText);
-    console.log(result);
-
     if (response.ok) {
-      console.log(`Registering as user ${name} (${pass})`);
-      console.log(result);
       setUser(newUser.userInfo);
     } else if (response.status == 403){
-      window.alert(`Login failed.\n\n${result.msg}`);
+      window.alert(`Registration failed.\n\n${result.msg}`);
     } else {
-      window.alert(`Login failed.\n\nReason:  ${response.statusText}`);
+      window.alert(`Registration failed.\n\nReason:  ${response.status} -- ${response.statusText}`);
     }
   };
+
   return (
     <div className="auth-form-container">
       <h2>Register</h2>
