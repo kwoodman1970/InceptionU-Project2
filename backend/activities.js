@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import mapboxgl from "mapbox-gl";
@@ -12,7 +13,9 @@ import YAML from "yamljs";
 import path from "path";
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import { expressjwt, ExpressJwtRequest } from "express-jwt";
+// import { expressjwt, ExpressJwtRequest } from "express-jwt";
+import pkg2 from 'express-jwt';
+const { expressjwt, ExpressJwtRequest } = pkg2;
 // Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert { type: "json" };
 import activities from "./activities.json" assert { type: "json" };
@@ -78,8 +81,8 @@ app.get("/users/:id/activities", (req, res) => {
           <meta charset="utf-8" />
           <title>MapBox Map</title>
           <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-          <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
-          <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
+          <script src="https://api.mapbox.com/mapbox-gl-js/v4/mapbox-gl.js"></script>
+          <link href="https://api.mapbox.com/mapbox-gl-js/v4/mapbox-gl.css" rel="stylesheet" />
           <style>
             body {
               margin: 0;
@@ -97,7 +100,8 @@ app.get("/users/:id/activities", (req, res) => {
           <div id="map"></div>
           <script>
             // This creates the MapBox map
-            mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
+            mapboxgl.accessToken 
+            // = process.env.MAPBOX_ACCESS_TOKEN
             // How I format for access token while making it 
             // not visible to the public??
             const map = new mapboxgl.Map({

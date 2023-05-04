@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cors from "cors";
 // import * as OpenApiValidator from "express-openapi-validator";
@@ -7,30 +8,35 @@ import cors from "cors";
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
+import fs from "fs";
 import path from "path";
 import fetch from "node-fetch";
-import dotenv from "dotenv";
-dotenv.config();
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+import pkg2 from "express-jwt";
+const { expressjwt, ExpressJwtRequest } = pkg2;
+import mapboxgl from "mapbox-gl";
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
 // @@@Not using this right now, b/c uudiv4@@@
 // import { v4 as uuidv4 } from "uuid";
-
-// @@@Not using fs module in the server.js, b/c not using app.post here anymore
-// So... prolly no need to import the fs module here?
-// Does this make the code more efficient, performance-wise?@@@
-// import fs from "fs";
 
 // Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert { type: "json" };
 import activities from "./activities.json" assert { type: "json" };
 import { userInfo } from "os";
 
-dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 4201;
 app.use(express.json());
 app.use(cors());
+
+const map = new mapboxgl.Map({
+  container: "map",
+  style: "mapbox://styles/mapbox/streets-v11",
+  center: [-122.4194, 37.7749],
+  zoom: 12,
+});
 
 // This randomizes the port number
 // const port = ~~(Math.random() * 65535);
@@ -51,6 +57,12 @@ app.use(cors());
 
 // This piece serves the OpenAPI spec
 // app.use("/spec", express.static(path.join("../openapi.yaml", "openapi.yaml")));
+
+// This defines a route for the OpenAPI spec
+// Also, it uses the swagger-ui-express library to generate a webpage
+// that displays the OpenAPI spec at the /docs endpoint
+// const swaggerDocument = YAML.load("../openapi.yaml");
+// app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // This piece validates requests & responses against the OpenAPI spec
 // app.use(
@@ -98,37 +110,37 @@ app.get("/users", (req, res) => {
   res.json(users);
 });
 
-// This logs a user in.
+// This logs a user in
 app.get("/login", (req, res) => {
   const name = req.query.name;
   const password = req.query.password;
 
   if (name == password) {
-    let userInfo = users.find(element => element.name == name);
+    let userInfo = users.find((element) => element.name == name);
 
     if (userInfo != null) {
       userInfo = JSON.parse(JSON.stringify(userInfo));
 
-      userInfo.friendsList.forEach(function(element, index, array) {
-        array[index] = {name:  users[element].name}
+      userInfo.friendsList.forEach(function (element, index, array) {
+        array[index] = { name: users[element].name };
       });
 
-      userInfo.createdActivities.forEach(function(element, index, array) {
-        array[index] = activities[element]
+      userInfo.createdActivities.forEach(function (element, index, array) {
+        array[index] = activities[element];
       });
 
-      userInfo.joinedActivities.forEach(function(element, index, array) {
-        array[index] = activities[element]
+      userInfo.joinedActivities.forEach(function (element, index, array) {
+        array[index] = activities[element];
       });
 
       res.send(userInfo);
     } else {
       res.status(404);
-      res.send({msg:  "Invalid credentials"});
+      res.send({ msg: "Invalid credentials" });
     }
   } else {
     res.status(404);
-    res.send({msg:  "Invalid credentials"});
+    res.send({ msg: "Invalid credentials" });
   }
 });
 
@@ -138,7 +150,7 @@ app.post("/user", (req, res) => {
   const password = req.body.password;
 
   if (newUser.name == password) {
-    const userInfo = users.find(element => element.name == newUser.name);
+    const userInfo = users.find((element) => element.name == newUser.name);
 
     if (userInfo == null) {
       newUser.userUID = users.length;
@@ -148,14 +160,16 @@ app.post("/user", (req, res) => {
       newUser.reviews = [];
 
       users.push(newUser);
-      res.send({userUID:  newUser.userUID});
+      res.send({ userUID: newUser.userUID });
     } else {
       res.status(403);
-      res.send({msg:  "User exists -- please log in or choose a different name"});
+      res.send({
+        msg: "User exists -- please log in or choose a different name",
+      });
     }
   } else {
     res.status(403);
-    res.send({msg:  "Invalid credentials"});
+    res.send({ msg: "Invalid credentials" });
   }
 });
 
