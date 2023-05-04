@@ -12,21 +12,16 @@ export const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const response = await fetch(`${VITE_SERVER_URL_ROOT}/login?name=${name}&password=${pass}`);
     const result = await response.json();
 
-    console.log(response);
-    console.log(response.statusText);
-    console.log(result);
-
     if (response.ok) {
-      console.log(`Logging in as user ${name} (${pass})`);
-      console.log(result);
       setUser(result);
     } else if (response.status == 404){
       window.alert(`Login failed.\n\n${result.msg}`);
     } else {
-      window.alert(`Login failed.\n\nReason:  ${response.statusText}`);
+      window.alert(`Login failed.\n\nReason:  ${response.status} -- ${response.statusText}`);
     }
   };
 

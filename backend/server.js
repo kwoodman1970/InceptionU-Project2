@@ -103,8 +103,6 @@ app.get("/login", (req, res) => {
   const name = req.query.name;
   const password = req.query.password;
 
-  console.log(`Trying to log in ${name} (${password})...`);
-
   if (name == password) {
     let userInfo = users.find(element => element.name == name);
 
@@ -123,7 +121,6 @@ app.get("/login", (req, res) => {
         array[index] = activities[element]
       });
 
-      console.log(userInfo);
       res.send(userInfo);
     } else {
       res.status(404);
@@ -135,17 +132,32 @@ app.get("/login", (req, res) => {
   }
 });
 
-// @@@Not using this right now, b/c uuidv4@@@
-// app.post("/users", (req, res) => {
-//   const newUser = {
-//     id: uuidv4(),
-//     username: req.body.username,
-//     password: req.body.password,
-//   };
+// This registers a new user.
+app.post("/user", (req, res) => {
+  const newUser = req.body.userInfo;
+  const password = req.body.password;
 
-//   users.users.push(newUser);
-//   res.status(201).json(newUser);
-// });
+  if (newUser.name == password) {
+    const userInfo = users.find(element => element.name == newUser.name);
+
+    if (userInfo == null) {
+      newUser.userUID = users.length;
+      newUser.createdActivities = [];
+      newUser.joinedActivities = [];
+      newUser.friendsList = [];
+      newUser.reviews = [];
+
+      users.push(newUser);
+      res.send({userUID:  newUser.userUID});
+    } else {
+      res.status(403);
+      res.send({msg:  "User exists -- please log in or choose a different name"});
+    }
+  } else {
+    res.status(403);
+    res.send({msg:  "Invalid credentials"});
+  }
+});
 
 app.get("/users/:id/friends", (req, res) => {
   const userId = req.params.id;
