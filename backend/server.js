@@ -1,14 +1,14 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import * as OpenApiValidator from "express-openapi-validator";
+// import * as OpenApiValidator from "express-openapi-validator";
 // The following import {validate} statement BELOW doesn't work,
 // use the ABOVE from the documentation for the library!
 // import { validate } from "express-openapi-validator";
-import pkg from "express-openapi-validator";
-const { validate } = pkg;
-import path from "path";
-import fetch from "node-fetch";
+// import pkg from "express-openapi-validator";
+// const { validate } = pkg;
+// import path from "path";
+// import fetch from "node-fetch";
 
 // @@@Not using this right now, b/c uudiv4@@@
 // import { v4 as uuidv4 } from "uuid";
@@ -20,7 +20,8 @@ import fetch from "node-fetch";
 
 // Assertion is needed b/c it's importing a file type and not a module
 import users from "./users.json" assert { type: "json" };
-import friends from "./friends.json" assert { type: "json" };
+import activities from "./activities.json" assert { type: "json" };
+import { userInfo } from "os";
 
 dotenv.config();
 
@@ -33,21 +34,21 @@ app.use(cors());
 // const port = ~~(Math.random() * 65535);
 
 // CORS for API requests.
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  // I'm a little worried about using the * wildcard here,
-  // since it's been declared above while importing
-  // from the OpenApiValidator library...
-  res.setHeader("Access-Control-Allow-Methods", "GET");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   // I'm a little worried about using the * wildcard here,
+//   // since it's been declared above while importing
+//   // from the OpenApiValidator library...
+//   res.setHeader("Access-Control-Allow-Methods", "GET");
+//   next();
+// });
 
 // @@@@Not using these right now, b/c uudiv4@@@
 // const users = { users: [...usersData.users] };
 // let friends = { friends: [...friendsData.friends] };
 
 // This piece serves the OpenAPI spec
-app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
+// app.use("/spec", express.static(path.join("../openapi.yaml", "openapi.yaml")));
 
 // This piece validates requests & responses against the OpenAPI spec
 // app.use(
@@ -58,22 +59,22 @@ app.use("/spec", express.static(path.join("/openapi.yaml", "openapi.yaml")));
 
 // This piece also does the same???
 // This is from the documentation and so actually works!!
-app.use(
-  OpenApiValidator.middleware({
-    apiSpec: "./openapi.yaml",
-    validateRequests: true, // (default)
-    validateResponses: true, // false by default
-  })
-);
+// app.use(
+//   OpenApiValidator.middleware({
+//     apiSpec: "../openapi.yaml",
+//     validateRequests: true, // (default)
+//     validateResponses: true, // false by default
+//   })
+// );
 
 // This is the error handler for the above block of code for OpenAPI
-app.use((err, req, res, next) => {
-  // format error
-  res.status(err.status || 500).json({
-    message: err.message,
-    errors: err.errors,
-  });
-});
+// app.use((err, req, res, next) => {
+//   // format error
+//   res.status(err.status || 500).json({
+//     msg: err.message,
+//     errors: err.errors,
+//   });
+// });
 
 // This grabs the Trails API from City of Calgary
 app.get("/data", async (req, res) => {
@@ -93,6 +94,43 @@ app.get("/data", async (req, res) => {
 // Do I need all the users at once, tho?
 app.get("/users", (req, res) => {
   res.json(users);
+});
+
+// This logs a user in.
+app.get("/login", (req, res) => {
+  const name = req.query.name;
+  const password = req.query.password;
+
+  console.log(`Trying to log in ${name} (${password})...`);
+
+  if (name == password) {
+    let userInfo = users.find(element => element.name == name);
+
+    if (userInfo != null) {
+      userInfo = JSON.parse(JSON.stringify(userInfo));
+
+      userInfo.friendsList.forEach(function(element, index, array) {
+        array[index] = {name:  users[element].name}
+      });
+
+      userInfo.createdActivities.forEach(function(element, index, array) {
+        array[index] = activities[element]
+      });
+
+      userInfo.joinedActivities.forEach(function(element, index, array) {
+        array[index] = activities[element]
+      });
+
+      console.log(userInfo);
+      res.send(userInfo);
+    } else {
+      res.status(404);
+      res.send({msg:  "Invalid credentials"});
+    }
+  } else {
+    res.status(404);
+    res.send({msg:  "Invalid credentials"});
+  }
 });
 
 // @@@Not using this right now, b/c uuidv4@@@

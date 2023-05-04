@@ -7,7 +7,7 @@ export const Logout = () => {
 
   return (
     <div className="auth-form-container">
-      <p>Currently logged in as <b>{user}</b></p>
+      <p>Currently logged in as <b>{user.name}</b></p>
       <button type="submit" onClick={() => setUser(null)}>Log Out</button>
     </div>
   );

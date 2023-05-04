@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import {UserContext} from "./UserContext.jsx";
 
+const VITE_SERVER_URL_ROOT = import.meta.env.VITE_SERVER_URL_ROOT;
+
 export const Login = (props) => {
   const loggedInUser = useContext(UserContext);
   const {user, setUser} = loggedInUser;
@@ -8,11 +10,26 @@ export const Login = (props) => {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`Logging in as user ${name} (${pass})`);
-    setUser(name);
+    const response = await fetch(`${VITE_SERVER_URL_ROOT}/login?name=${name}&password=${pass}`);
+    const result = await response.json();
+
+    console.log(response);
+    console.log(response.statusText);
+    console.log(result);
+
+    if (response.ok) {
+      console.log(`Logging in as user ${name} (${pass})`);
+      console.log(result);
+      setUser(result);
+    } else if (response.status == 404){
+      window.alert(`Login failed.\n\n${result.msg}`);
+    } else {
+      window.alert(`Login failed.\n\nReason:  ${response.statusText}`);
+    }
   };
+
   return (
     <div className="auth-form-container">
       <h2>Login</h2>

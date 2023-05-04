@@ -14,7 +14,7 @@ export default function ActivitiesLayout() {
       <p>Join or Create an activity!!!</p>
       {user != null ?
         <>
-          <p>Currently logged in as <b>{user}</b></p>
+          <p>Currently logged in as <b>{user.name}</b></p>
           <nav>
             <NavLink to="createactivities">Create Activity</NavLink>
             <NavLink to="joinedactivities">Join Activity</NavLink>

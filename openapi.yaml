@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Calgary Fit Friends
   description: Create pop-up activities and invite family & friends.
-  version: "1.0"
+  version: "1.1"
 
 servers:
   - url: http://localhost:5020
@@ -20,6 +20,36 @@ paths:
             text/html:
               schema:
                 type: string
+
+  /login:
+    get:
+      summary: Log a user in
+      description: Log a user in.
+      parameters:
+        - name: name
+          in: query
+          description: User name
+          schema:
+            type: string
+          required: true
+        - name: password
+          in: query
+          description: User password
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: User logged in.
+          content:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerMessage"
 
   /user:
     post:
@@ -338,6 +368,8 @@ components:
         userUID:
           $ref: "#/components/schemas/UID"
         name:
+          type: string
+        email:
           type: string
         createdActivities:
           type: array
