@@ -1,4 +1,6 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 import mapboxgl from "mapbox-gl";
 mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 import * as OpenApiValidator from "express-openapi-validator";
@@ -8,8 +10,6 @@ const { validate } = pkg;
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import path from "path";
-import dotenv from "dotenv";
-dotenv.config();
 // import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import { expressjwt, ExpressJwtRequest } from "express-jwt";
@@ -68,8 +68,58 @@ app.get("/users/:id/activities", (req, res) => {
   const userActivities = activities.filter(
     (activity) => activity.userId === userId
   );
-  res.json(userActivities);
-});
+ 
+
+    // This adds the MapBox map to the response object
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8" />
+          <title>MapBox Map</title>
+          <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+          <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+          <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+            #map {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              width: 100%;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="map"></div>
+          <script>
+            // This creates the MapBox map
+            mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
+            // How I format for access token while making it 
+            // not visible to the public??
+            const map = new mapboxgl.Map({
+              container: 'map',
+              style: 'mapbox://styles/mapbox/streets-v11',
+              center: [-96, 37.8],
+              zoom: 3,
+            });
+  
+            // This adds markers for each user activity
+            ${userActivities
+              .map(
+                (activity) => `
+                new mapboxgl.Marker().setLngLat([${activity.longitude}, ${activity.latitude}]).addTo(map);
+              `
+              )
+              .join("")}
+          </script>
+        </body>
+      </html>
+    `);
+  });
 
 // This adds a new activity for a user
 app.post("/users/:id/activities", (req, res) => {
@@ -127,7 +177,7 @@ app.post("/users/:id/activities", (req, res) => {
           };
           // Use the MapBox API to add the marker to the map
           // Replace <ACCESS_TOKEN> with your actual MapBox access token
-          const mapboxUrl = `https://api.mapbox.com/datasets/v1/<USERNAME>/<DATASET_ID>/features?access_token=<ACCESS_TOKEN>`;
+          const mapboxUrl = `https://api.mapbox.com/datasets/v1/<USERNAME>/<DATASET_ID>/features?access_token=QQQQQQQ`;
           fetch(mapboxUrl, {
             method: "POST",
             body: JSON.stringify(marker),
