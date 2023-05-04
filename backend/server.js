@@ -8,6 +8,7 @@ import cors from "cors";
 // import { validate } from "express-openapi-validator";
 import pkg from "express-openapi-validator";
 const { validate } = pkg;
+import bcrypt from "bcrypt";
 import fs from "fs";
 import path from "path";
 import fetch from "node-fetch";
@@ -192,5 +193,40 @@ app.get("/users/:id/friends", (req, res) => {
 //   friends.friends.push(newFriend);
 //   res.status(201).json(newFriend);
 // });
+
+app.post("/users/:id/friends", (req, res) => {
+  // This reads existing user friends from file
+  fs.readFile("friends.json", (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error reading user's friend(s) from file");
+      return;
+    }
+
+    // This parses JSON data from file.
+    const friends = JSON.parse(data);
+
+    // This generate a unique ID for the new user.
+    const newFriendId = Date.now().toString();
+
+    // This adds the new user friend to the list of existing friends.
+    const newFriend = {
+      id: newFriendId,
+      username: req.body.username,
+      password: req.body.password,
+    };
+    users.push(newFriend);
+
+    // This writes updated list of users back to file in fs.
+    fs.writeFile("friends.json", JSON.stringify(users), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Error writing user's friend to file");
+      } else {
+        res.send("Friend created successfully");
+      }
+    });
+  });
+});
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
