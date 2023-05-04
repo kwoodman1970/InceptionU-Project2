@@ -42,11 +42,6 @@ const router = createBrowserRouter(
   );
 
   function App3() {
-    const loggedInUser = useContext(UserContext);
-    const user = loggedInUser.user;
-
-    console.log(`Logged-in user:  ${user.name}`);
-
     return <RouterProvider router={router} />;
   }
 
