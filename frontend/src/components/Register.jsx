@@ -1,14 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+import {UserContext} from "./UserContext.jsx";
 
 export const Register = (props) => {
+  const loggedInUser = useContext(UserContext);
+  const {user, setUser} = loggedInUser;
+
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
+    console.log(`Creating new user ${name} (${pass}) at ${email}`);
+    setUser(name);
   };
   return (
     <div className="auth-form-container">

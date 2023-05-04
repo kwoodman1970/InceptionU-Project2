@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import {
   createBrowserRouter,
   Route,
@@ -5,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 //import { defaultMethod } from "react-router-dom/dist/dom";
+import {UserContext} from "./components/UserContext.jsx";
 
 //pages
 import Home from "./Pages/Home";
@@ -32,17 +34,20 @@ const router = createBrowserRouter(
       <Route path="activities" element={<ActivitiesLayout />}>
         <Route path="createactivities" element={<Activities />} />
         <Route path="joinedactivities" element={<Joinactivity />} />
-
         {/* <Route index element={<Activities />} /> */}
       </Route>
-
       <Route path="*" element={<NotFound />} />
     </Route>
   )
-);
+  );
 
-function App3() {
-  return <RouterProvider router={router} />;
-}
+  function App3() {
+    const loggedInUser = useContext(UserContext);
+    const user = loggedInUser.user;
 
-export default App3;
+    console.log(`Logged-in user:  ${user.name}`);
+
+    return <RouterProvider router={router} />;
+  }
+
+  export default App3;
