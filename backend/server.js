@@ -97,7 +97,7 @@ app.get("/users", (req, res) => {
 });
 
 // This logs a user in.
-app.get("/login", (req, res) => {
+app.get("/user", (req, res) => {
   const name = req.query.name;
   const password = req.query.password;
 

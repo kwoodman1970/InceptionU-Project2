@@ -13,7 +13,7 @@ export const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${VITE_SERVER_URL_ROOT}/login?name=${name}&password=${pass}`);
+    const response = await fetch(`${VITE_SERVER_URL_ROOT}/user?name=${name}&password=${pass}`);
     const result = await response.json();
 
     if (response.ok) {
