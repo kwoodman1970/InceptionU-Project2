@@ -1,0 +1,22 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "description": "[Project&nbsp;1](https://github.com/kwoodman1970/InceptionU-Project1) was\r almost entirely about creating a back-end with [Node.js](https://nodejs.org/)\r and [Express.js](https://expressjs.com/) with some\r [MongoDB](https://www.mongodb.com/) thrown in.  Project&nbsp;2 was about\r creating a front-end with [React.js](https://react.dev/) and\r [Vite.js](https://vitejs.dev/), as well as learning how to collaborate in a\r team on GitHub.",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd frontend && npm install && cd ../backend && npm install",
+    "start": "cd backend && npm run start",
+    "build": "cd frontend && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwoodman1970/InceptionU-Project2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwoodman1970/InceptionU-Project2/issues"
+  },
+  "homepage": "https://github.com/kwoodman1970/InceptionU-Project2#readme"
+}

@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import path from "path";
+
 // import * as OpenApiValidator from "express-openapi-validator";
 // The following import {validate} statement BELOW doesn't work,
 // use the ABOVE from the documentation for the library!
@@ -29,6 +31,12 @@ const app = express();
 const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
+
+const __dirname = path.resolve();
+const pathToBuild = path.join(__dirname, "../frontend/dist");
+app.use(express.static(pathToBuild));
+
+console.log(`pathToBuild is \"${pathToBuild}\"`);
 
 // This randomizes the port number
 // const port = ~~(Math.random() * 65535);
