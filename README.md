@@ -1,39 +1,125 @@
-# InceptionU Project&nbsp;2&nbsp;&ndash; Calgary Fit Friends
+# InceptionU Project 2 &ndash; Calgary FitFriends
 
-[Project&nbsp;1](https://github.com/kwoodman1970/InceptionU-Project1) was
-almost entirely about creating a back-end with [Node.js](https://nodejs.org/)
-and [Express.js](https://expressjs.com/) with some
-[MongoDB](https://www.mongodb.com/) thrown in.  Project&nbsp;2 was about
-creating a front-end with [React.js](https://react.dev/) and
-[Vite.js](https://vitejs.dev/), as well as learning how to collaborate in a
-team on GitHub.
+**Status:**  Inactive<br />
+*This project is not currently being developed but it may be revisited in the future.*
 
-The intent was to create an application that would allow people to create
-ad-hoc, pop-up physical activities in and around
-[Calgary](https://www.calgary.ca/).  It would pull data from the [City of
-Calgary's Open Data](https://data.calgary.ca/) & use a map interface to set the
-activity's location, and the weather forecast from a meteorological service.
+## About This Project
 
-I was the team's leader, mentor, consultant and project manager.  The other
-team members were new to software development, so I did my best to help them
-level up.
+I was on a team with [Zack Spring Chief](https://github.com/JZackSpringChief) and [J.J.](https://github.com/Astrognarly).  This was our submission for Project 2 in the [Full Stack Developer](https://www.inceptionu.com/full-stack-developer-program/) program at [InceptionU](https://www.inceptionu.com/) (we were given three projects to do altogether).
 
-We didn't get very far.
+### The Assignment
 
-That's okay, though, because this was a fail-now-fly-later project.  This was
-the opportunity to learn new things before the rubber hit the road with
-Project&nbsp;3.
+The goal of Project 2 was to create a full stack app that addresses a unique challenge or problem.
 
-My main contribution to this project's code was an
-[OpenAPI](https://www.openapis.org/) specification and a user
-login/authentication system.
+We were given additional features to strive for, such as:
 
-Personally, with this project, my key learning points were:
+- implement full [CRUD functionality](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality
+- have more than one or two web pages
+- create an API that handles more than just data
+- use a document-style database (like [MongoDB](https://www.mongodb.com/))
+- use a third-party API (e.g. an open data set)
+- [React](https://react.dev/) with a context API, a global state library and/or other features
+- third-party components imported into [React](https://react.dev/)
+- authentication
+- use an SQL database
+- an administrator's companion application
 
-- React & Vite
-- Basics of [Scrum](https://scrumguides.org/)
-- [Trello](https://trello.com/)
-- Collaboration through GitHub
-- Some lessons cannot be taught &ndash; they must be experienced or realized
-- How to hack [Discord](https://discord.com/) to get a user's profile picture
-  &ndash; and find a hidden job offer
+### The Result
+
+Alas, time ran out on us and we weren't able to implement many of our planned features.
+
+### The True Goal
+
+The true goal of this project *wasn't* to create a whiz-bang application.  The true goal was to **learn**.
+
+When we first met as a team, we discussed our skills &amp; experiences and what we needed to learn most during this project.  We decided that I would be leader &amp; mentor, [Zack](https://github.com/JZackSpringChief) would work on the front end and [J.J.](https://github.com/Astrognarly) would begin by working on the back end.
+
+## How to Install
+
+### Prerequisites
+
+You will need:
+
+- [npm](https://www.npmjs.com/package/npm)
+
+### Installation
+
+Use the green `<> Code` button to either clone this repository or download the zip file.
+
+Next, some envorinment variables need to be set.  In the `code/backend` directory, create a text file called `.env` with the following content:
+
+```
+MAPBOX_ACCESS_TOKEN=null
+PORT=4201
+```
+
+In the `code/frontend` directory, create a text file called `.env` with the following content:
+```
+VITE_SERVER_URL_ROOT=http://localhost:4201
+```
+
+Next, the dependant JavaScript packages need to be installed.  Open a command shell and change to the `code/backend` directory, then execute this command:
+
+```
+npm install
+```
+
+Change to the `code/frontend` directory, then execute this command:
+
+```
+npm install
+```
+
+## How to Use
+
+To start the back end, open a command shell and change to the `code/backend` directory, then enter the following command:
+
+```
+npm run start
+```
+
+To start the front end, open another command shell and change to the `code/frontend` directory, then enter the following command:
+
+```
+npm run dev
+```
+
+You can now use any modern web browser to browse to `localhost:4200`.
+
+The following login credentials are available:
+
+|UserID |Password|
+|-------|--------|
+|Adam   |Adam    |
+|Eve    |Eve     |
+|Serpent|Serpent |
+
+To stop the back end and front end, type `Ctrl-C` or send a SIGINT signal to them.
+
+## Documentation
+
+See the [openapi.yaml](openapi.yaml) file for the complete API specification.  **TIP:**  open this file in an [OpenAPI Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/kwoodman1970/InceptionU-Project1/main/openapi.yaml) for easier viewing.
+
+## Technologies Used
+
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
+- [fs.js](https://www.npmjs.com/package/fs-js)
+- [HTTP requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [OpenAPI](https://www.openapis.org/) ([YAML](https://yaml.org/))
+
+## TODO
+
+It's a long, long list.
+
+## How to Contribute
+
+I'm not accepting contributions to this project.
+
+## Copyright Notice
+
+The files in this repository are made available under the [GitHub Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#5-license-grant-to-other-users).  Beyond that, I [reserve all other rights](https://choosealicense.com/no-permission/).
+
+Copyright &copy; 2023 Kevin Woodman
