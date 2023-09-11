@@ -98,7 +98,16 @@ To stop the back end and front end, type `Ctrl-C` or send a SIGINT signal to the
 
 ## Documentation
 
-See the [openapi.yaml](openapi.yaml) file for the complete API specification.  **TIP:**  open this file in an [OpenAPI Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/kwoodman1970/InceptionU-Project1/main/openapi.yaml) for easier viewing.
+See the [openapi.yaml](openapi.yaml) file for the complete API specification.  **TIP:**  open this file in an [OpenAPI Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/kwoodman1970/InceptionU-Project2/main/openapi.yaml) for easier viewing.
+
+Our development methodology was as follows:
+
+1. [The Assignment](docs_methodology/1_Assignment.md)
+2. [Dreaming](docs_methodology/2_Dreaming.md)
+3. [Identifying the Problem](docs_methodology/3_Problem.md)
+4. [The Reveal](docs_methodology/4_Reveal.md)
+5. [Focusing](docs_methodology/5_Focusing.md)
+6. [The Result](docs_methodology/6_Result.md)
 
 ## Technologies Used
 
