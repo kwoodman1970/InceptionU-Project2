@@ -1,4 +1,8 @@
-# InceptionU Project 2
+# InceptionU Project 2 &ndash; Development Methodology
+
+Previous:  [The Reveal](4_Reveal.md)<br />
+[Back to README.md](../README.md)<br />
+Next:  [The Result](6_Result.md)
 
 ## 5.  Focusing
 
@@ -126,3 +130,7 @@ This is what we came up with:
 1. Administrator logs in
 2. Administrator reviews appeals of bans
 3. Administrator optionally unbans bad user &amp; device
+
+---
+
+Next:  [The Result](6_Result.md)

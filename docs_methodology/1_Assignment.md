@@ -1,4 +1,8 @@
-# InceptionU Project 2
+# InceptionU Project 2 &ndash; Development Methodology
+
+Previous:<br />
+[Back to README.md](../README.md)<br />
+Next:  [Dreaming](2_Dreaming.md)
 
 ## 1.  The Assignment
 
@@ -25,3 +29,7 @@ On Project 2 Launch Day (April 3, 2023), we were all given the following assignm
 We were then put into teams and given some time to come up with a project to work on.
 
 My team included [Zack](https://github.com/JZackSpringChief/) and [J.J.](https://github.com/Astrognarly/)  Since I had the most experience, I assumed a leadership role and made it my goal to develop my teammates' coding skills.  My project management skills were rustier than a midwest American factory, so this would be a growing opportunity for me as well.
+
+---
+
+Next:  [Dreaming](2_Dreaming.md)<br />

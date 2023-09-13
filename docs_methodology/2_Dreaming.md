@@ -1,4 +1,8 @@
-# InceptionU Project 2
+# InceptionU Project 2 &ndash; Development Methodology
+
+Previous:  [The Assignment](1_Assignment.md)<br />
+[Back to README.md](../README.md)<br />
+Next:  [Identifying the Problem](3_Problem.md)
 
 ## 2.  Dreaming
 
@@ -118,3 +122,7 @@ These are the notes of the ideas that we came up (we wanted to make use of [The 
 - No need to share personal info, just pick up and play
 - No need to sign up to use app – registering your email and creating a username is a turnoff for a lot of people (annoying + privacy concerns), or just enough effort to not be worth trying a new app (unless recommended by a trusted individual)
 - If a further ongoing friendly relationship is desired, then share names after the 1st initial ad-hoc activity?
+
+---
+
+Next:  [Identifying the Problem](3_Problem.md)

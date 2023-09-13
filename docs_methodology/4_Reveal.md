@@ -1,4 +1,8 @@
-# InceptionU Project 2
+# InceptionU Project 2 &ndash; Development Methodology
+
+Previous:  [Identifying the Problem](3_Problem.md)<br />
+[Back to README.md](../README.md)<br />
+Next:  [Focusing](5_Focusing.md)
 
 ## 4.  The Reveal
 
@@ -47,3 +51,7 @@ We were then all challenged to to drill down deeper into the problem with a 5 Wh
 - Why aren’t people as connected as they could be?
     - COVID restrictions made them work from home
     - COVID restrictions gave less reason to go out
+
+---
+
+Next:  [Focusing](5_Focusing.md)

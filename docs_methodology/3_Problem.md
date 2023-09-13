@@ -1,4 +1,8 @@
-# InceptionU Project 2
+# InceptionU Project 2 &ndash; Development Methodology
+
+Previous:  [Dreaming](2_Dreaming.md)<br />
+[Back to README.md](../README.md)<br />
+Next:  [The Reveal](4_Reveal.md)
 
 ## 3. Identifying the Problem
 
@@ -59,3 +63,7 @@ Target Audience
 
 Market Research
 : Calgary Sports &amp; Social Club – our app will be free or ad-supported and less structured (more for smaller groups than teams and leagues)
+
+---
+
+Next:  [The Reveal](4_Reveal.md)

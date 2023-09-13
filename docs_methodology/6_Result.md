@@ -1,4 +1,8 @@
-# InceptionU Project 2
+# InceptionU Project 2 &ndash; Development Methodology
+
+Previous:  [Focusing](5_Focusing.md)<br />
+[Back to README.md](../README.md)<br />
+Next:
 
 ## 6.  The Result
 
@@ -68,3 +72,7 @@ My personal key learnings were:
 -	Collaboration through GitHub (use of branches)
 -	Some lessons cannot be taught &ndash; they must be experienced or realized
 -	How to hack Discord’s website to get a profile picture and a job offer
+
+---
+
+[Back to README.md](../README.md)
