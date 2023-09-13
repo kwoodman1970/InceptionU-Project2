@@ -32,7 +32,7 @@ Alas, time ran out on us and we weren't able to implement many of our planned fe
 
 The true goal of this project *wasn't* to create a whiz-bang application.  The true goal was to **learn**.
 
-When we first met as a team, we discussed our skills &amp; experiences and what we needed to learn most during this project.  We decided that I would be leader &amp; mentor, [Zack](https://github.com/JZackSpringChief) would work on the front end and [J.J.](https://github.com/Astrognarly) would begin by working on the back end.
+When we first met as a team, we discussed our skills &amp; experiences and what we needed to learn most during this project.  We decided that I would be leader &amp; mentor, [Zack](https://github.com/JZackSpringChief) would work mostly on the front end and [J.J.](https://github.com/Astrognarly) would begin by working on the back end.
 
 ## How to Install
 
@@ -46,25 +46,26 @@ You will need:
 
 Use the green `<> Code` button to either clone this repository or download the zip file.
 
-Next, some envorinment variables need to be set.  In the `code/backend` directory, create a text file called `.env` with the following content:
+Next, open a command shell and change to the `code/backend` directory.  Create a text file called `.env` with the following content:
 
 ```
 MAPBOX_ACCESS_TOKEN=null
 PORT=4201
 ```
 
-In the `code/frontend` directory, create a text file called `.env` with the following content:
-```
-VITE_SERVER_URL_ROOT=http://localhost:4201
-```
-
-Next, the dependant JavaScript packages need to be installed.  Open a command shell and change to the `code/backend` directory, then execute this command:
+Next, install the necessary JavaScript packages by executing this command:
 
 ```
 npm install
 ```
 
-Change to the `code/frontend` directory, then execute this command:
+Next, change to the `code/frontend` directory.  Create a text file called `.env` with the following content:
+
+```
+VITE_SERVER_URL_ROOT=http://localhost:4201
+```
+
+Finally, install the necessary JavaScript packages by executing this command:
 
 ```
 npm install
