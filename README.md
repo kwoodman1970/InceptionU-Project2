@@ -5,7 +5,7 @@
 
 ## About This Project
 
-I was on a team with [Zack Spring Chief](https://github.com/JZackSpringChief) and [J.J.](https://github.com/Astrognarly).  This was our submission for Project 2 in the [Full Stack Developer](https://www.inceptionu.com/full-stack-developer-program/) program at [InceptionU](https://www.inceptionu.com/) (we were given three projects to do altogether).
+I was on a team with [Zack Spring Chief](https://github.com/JZackSpringChief) and [J.J.](https://github.com/Astrognarly)  This was our submission for Project 2 in the [Full Stack Developer](https://www.inceptionu.com/full-stack-developer-program/) program at [InceptionU](https://www.inceptionu.com/) (we were given three projects to do altogether).
 
 ### The Assignment
 
@@ -13,7 +13,7 @@ The goal of Project 2 was to create a full stack app that addresses a unique cha
 
 We were given additional features to strive for, such as:
 
-- implement full [CRUD functionality](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality
+- implement full [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality
 - have more than one or two web pages
 - create an API that handles more than just data
 - use a document-style database (like [MongoDB](https://www.mongodb.com/))
@@ -44,29 +44,21 @@ You will need:
 
 ### Installation
 
-Use the green `<> Code` button to either clone this repository or download the zip file.
-
-Next, open a command shell and change to the `code/backend` directory.  Create a text file called `.env` with the following content:
-
+1. Use the green `<> Code` button to either clone this repository or download the zip file.
+2. Open a command shell and change to the `code/backend` directory.  Create a text file called `.env` with the following content:
 ```
 MAPBOX_ACCESS_TOKEN=null
 PORT=4201
 ```
-
-Next, install the necessary JavaScript packages by executing this command:
-
+3. Install the necessary JavaScript packages by executing this command:
 ```
 npm install
 ```
-
-Next, change to the `code/frontend` directory.  Create a text file called `.env` with the following content:
-
+4. Change to the `code/frontend` directory.  Create a text file called `.env` with the following content:
 ```
 VITE_SERVER_URL_ROOT=http://localhost:4201
 ```
-
-Finally, install the necessary JavaScript packages by executing this command:
-
+5. Install the necessary JavaScript packages by executing this command:
 ```
 npm install
 ```
